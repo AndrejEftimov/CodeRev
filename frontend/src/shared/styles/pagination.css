@@ -1,0 +1,62 @@
+@layer components {
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-top: 0.5rem;
+    }
+
+    .pagination__summary {
+        display: grid;
+        gap: 0.125rem;
+        color: var(--color-fg-muted);
+        line-height: 1.4;
+    }
+
+    .pagination__summary p {
+        margin: 0;
+    }
+
+    .pagination__range {
+        font-size: 1rem;
+    }
+
+    .pagination__page {
+        font-size: 0.95rem;
+    }
+
+    .pagination__summary strong {
+        color: var(--color-fg-secondary);
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .pagination__actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .pagination__button {
+        min-height: 2.25rem;
+        padding: 0.45rem 0.75rem;
+    }
+
+    @media (max-width: 40rem) {
+        .pagination {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .pagination__actions {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .pagination__button {
+            width: 100%;
+        }
+    }
+}

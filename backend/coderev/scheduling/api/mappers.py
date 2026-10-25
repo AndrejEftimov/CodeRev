@@ -1,5 +1,4 @@
-from django.utils import timezone
-
+from core.timezones import to_display_date_time_parts
 from scheduling.domain import get_review_slot_status
 
 
@@ -20,15 +19,19 @@ def _duration_minutes(review_slot):
 def _map_review_slot_schedule(review_slot, *, now=None):
     """Map the shared ReviewSlot scheduling fields."""
 
-    start_at = timezone.localtime(review_slot.start_at)
-    end_at = timezone.localtime(review_slot.end_at)
+    start_date, start_time = to_display_date_time_parts(
+        review_slot.start_at
+    )
+    end_date, end_time = to_display_date_time_parts(
+        review_slot.end_at
+    )
 
     return {
         "uuid": str(review_slot.uuid),
-        "startDate": start_at.strftime("%Y-%m-%d"),
-        "startTime": start_at.strftime("%H:%M"),
-        "endDate": end_at.strftime("%Y-%m-%d"),
-        "endTime": end_at.strftime("%H:%M"),
+        "startDate": start_date,
+        "startTime": start_time,
+        "endDate": end_date,
+        "endTime": end_time,
         "durationMinutes": _duration_minutes(review_slot),
         "status": get_review_slot_status(
             review_slot,

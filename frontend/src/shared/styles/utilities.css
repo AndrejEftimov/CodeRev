@@ -1,0 +1,23 @@
+@layer utilities {
+    .font-code {
+        font-family: var(--font-mono);
+    }
+
+    .text-brand-gradient {
+        background: linear-gradient(
+            110deg,
+            var(--color-primary),
+            var(--color-secondary) 58%,
+            var(--color-accent)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .focus-glow {
+        box-shadow: var(--shadow-focus-glow);
+    }
+}

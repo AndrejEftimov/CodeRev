@@ -1,0 +1,419 @@
+/* =========================================================
+   CodeRev Theme
+   ---------------------------------------------------------
+   Design direction:
+   - Light + dark from the start
+   - Neutral surfaces remain achromatic: black, white, and gray
+   - Warm/off-white page background allowed in light mode
+   - IDE-inspired syntax palette for brand and emphasis
+   - Border-driven surfaces with restrained regular/inset depth
+   - Sharper component geometry is handled at component level
+   ========================================================= */
+
+
+/* =========================================================
+   Tailwind theme tokens
+   ========================================================= */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+
+    /* -----------------------------------------------------
+       Spacing
+       ----------------------------------------------------- */
+
+    --spacing: 0.25rem;
+
+
+    /* -----------------------------------------------------
+       Typography
+       ----------------------------------------------------- */
+
+    --font-sans:
+        "Inter",
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    --font-mono:
+        "JetBrains Mono",
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+
+    /* -----------------------------------------------------
+       Radius
+       Keep these global values stable. Individual CodeRev
+       components should prefer the smaller radius utilities.
+       ----------------------------------------------------- */
+
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-base: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+
+
+    /* -----------------------------------------------------
+       Neutral surfaces
+       ----------------------------------------------------- */
+
+    --color-page: var(--coderev-page);
+    --color-surface: var(--coderev-surface);
+    --color-elevated: var(--coderev-elevated);
+    --color-sunken: var(--coderev-sunken);
+    --color-overlay: var(--coderev-overlay);
+
+
+    /* -----------------------------------------------------
+       Text / foreground
+       ----------------------------------------------------- */
+
+    --color-fg: var(--coderev-fg);
+    --color-fg-secondary: var(--coderev-fg-secondary);
+    --color-fg-muted: var(--coderev-fg-muted);
+    --color-fg-inverse: var(--coderev-fg-inverse);
+
+
+    /* -----------------------------------------------------
+       Borders
+       ----------------------------------------------------- */
+
+    --color-border-subtle: var(--coderev-border-subtle);
+    --color-border: var(--coderev-border);
+    --color-border-strong: var(--coderev-border-strong);
+
+
+    /* -----------------------------------------------------
+       Primary / blue syntax family
+       ----------------------------------------------------- */
+
+    --color-primary-50: var(--coderev-primary-50);
+    --color-primary-100: var(--coderev-primary-100);
+    --color-primary-200: var(--coderev-primary-200);
+    --color-primary-300: var(--coderev-primary-300);
+    --color-primary-400: var(--coderev-primary-400);
+    --color-primary-500: var(--coderev-primary-500);
+    --color-primary-600: var(--coderev-primary-600);
+    --color-primary-700: var(--coderev-primary-700);
+    --color-primary-800: var(--coderev-primary-800);
+    --color-primary-900: var(--coderev-primary-900);
+    --color-primary-950: var(--coderev-primary-950);
+
+    --color-primary: var(--coderev-primary);
+    --color-primary-strong: var(--coderev-primary-strong);
+    --color-primary-soft: var(--coderev-primary-soft);
+
+
+    /* -----------------------------------------------------
+       Secondary / violet syntax family
+       ----------------------------------------------------- */
+
+    --color-secondary-50: var(--coderev-secondary-50);
+    --color-secondary-100: var(--coderev-secondary-100);
+    --color-secondary-200: var(--coderev-secondary-200);
+    --color-secondary-300: var(--coderev-secondary-300);
+    --color-secondary-400: var(--coderev-secondary-400);
+    --color-secondary-500: var(--coderev-secondary-500);
+    --color-secondary-600: var(--coderev-secondary-600);
+    --color-secondary-700: var(--coderev-secondary-700);
+    --color-secondary-800: var(--coderev-secondary-800);
+    --color-secondary-900: var(--coderev-secondary-900);
+    --color-secondary-950: var(--coderev-secondary-950);
+
+    --color-secondary: var(--coderev-secondary);
+    --color-secondary-strong: var(--coderev-secondary-strong);
+    --color-secondary-soft: var(--coderev-secondary-soft);
+
+
+    /* -----------------------------------------------------
+       Accent / golden syntax family
+       ----------------------------------------------------- */
+
+    --color-accent-50: var(--coderev-accent-50);
+    --color-accent-100: var(--coderev-accent-100);
+    --color-accent-200: var(--coderev-accent-200);
+    --color-accent-300: var(--coderev-accent-300);
+    --color-accent-400: var(--coderev-accent-400);
+    --color-accent-500: var(--coderev-accent-500);
+    --color-accent-600: var(--coderev-accent-600);
+    --color-accent-700: var(--coderev-accent-700);
+    --color-accent-800: var(--coderev-accent-800);
+    --color-accent-900: var(--coderev-accent-900);
+    --color-accent-950: var(--coderev-accent-950);
+
+    --color-accent: var(--coderev-accent);
+    --color-accent-strong: var(--coderev-accent-strong);
+    --color-accent-soft: var(--coderev-accent-soft);
+
+
+    /* -----------------------------------------------------
+       Additional IDE syntax families
+       ----------------------------------------------------- */
+
+    --color-cyan: var(--coderev-cyan);
+    --color-cyan-soft: var(--coderev-cyan-soft);
+
+    --color-orange: var(--coderev-orange);
+    --color-orange-soft: var(--coderev-orange-soft);
+
+    --color-pink: var(--coderev-pink);
+    --color-pink-soft: var(--coderev-pink-soft);
+
+
+    /* -----------------------------------------------------
+       Semantic states
+       ----------------------------------------------------- */
+
+    --color-success: var(--coderev-success);
+    --color-success-soft: var(--coderev-success-soft);
+
+    --color-warning: var(--coderev-warning);
+    --color-warning-soft: var(--coderev-warning-soft);
+
+    --color-danger: var(--coderev-danger);
+    --color-danger-soft: var(--coderev-danger-soft);
+
+    --color-info: var(--coderev-info);
+    --color-info-soft: var(--coderev-info-soft);
+
+    --color-focus: var(--coderev-focus);
+
+
+    /* -----------------------------------------------------
+       Syntax-role aliases
+       ----------------------------------------------------- */
+
+    --color-syntax-keyword: var(--coderev-syntax-keyword);
+    --color-syntax-function: var(--coderev-syntax-function);
+    --color-syntax-string: var(--coderev-syntax-string);
+    --color-syntax-number: var(--coderev-syntax-number);
+    --color-syntax-type: var(--coderev-syntax-type);
+    --color-syntax-operator: var(--coderev-syntax-operator);
+    --color-syntax-comment: var(--coderev-syntax-comment);
+
+
+    /* -----------------------------------------------------
+       Depth / effects
+       ----------------------------------------------------- */
+
+    --shadow-elevated: var(--coderev-shadow-elevated);
+    --inset-shadow-sunken: var(--coderev-shadow-sunken);
+    --shadow-focus-glow: var(--coderev-shadow-focus-glow);
+}
+
+
+/* =========================================================
+   Shared IDE palette
+   ========================================================= */
+
+:root {
+    --z-topbar: 40;
+    --z-modal: 100;
+    --z-popover: 110;
+    --z-toast: 120;
+
+
+    /* Primary / blue */
+    --coderev-primary-50: #eff6ff;
+    --coderev-primary-100: #dbeafe;
+    --coderev-primary-200: #bfdbfe;
+    --coderev-primary-300: #93c5fd;
+    --coderev-primary-400: #60a5fa;
+    --coderev-primary-500: #3b82f6;
+    --coderev-primary-600: #2563eb;
+    --coderev-primary-700: #1d4ed8;
+    --coderev-primary-800: #1e40af;
+    --coderev-primary-900: #1e3a8a;
+    --coderev-primary-950: #172554;
+
+    /* Secondary / violet */
+    --coderev-secondary-50: #f5f3ff;
+    --coderev-secondary-100: #ede9fe;
+    --coderev-secondary-200: #ddd6fe;
+    --coderev-secondary-300: #c4b5fd;
+    --coderev-secondary-400: #a78bfa;
+    --coderev-secondary-500: #8b5cf6;
+    --coderev-secondary-600: #7c3aed;
+    --coderev-secondary-700: #6d28d9;
+    --coderev-secondary-800: #5b21b6;
+    --coderev-secondary-900: #4c1d95;
+    --coderev-secondary-950: #2e1065;
+
+    /* Accent / golden yellow */
+    --coderev-accent-50: #fffbeb;
+    --coderev-accent-100: #fef3c7;
+    --coderev-accent-200: #fde68a;
+    --coderev-accent-300: #fcd34d;
+    --coderev-accent-400: #fbbf24;
+    --coderev-accent-500: #f59e0b;
+    --coderev-accent-600: #d97706;
+    --coderev-accent-700: #b45309;
+    --coderev-accent-800: #92400e;
+    --coderev-accent-900: #78350f;
+    --coderev-accent-950: #451a03;
+}
+
+
+/* =========================================================
+   Light theme
+   ========================================================= */
+
+:root {
+    color-scheme: light;
+
+    --coderev-page: #faf9f6;
+    --coderev-surface: #ffffff;
+    --coderev-elevated: #ffffff;
+    --coderev-sunken: #f5f5f5;
+    --coderev-overlay: #ffffff;
+
+    --coderev-fg: #111111;
+    --coderev-fg-secondary: #3a3a3a;
+    --coderev-fg-muted: #707070;
+    --coderev-fg-inverse: #ffffff;
+
+    --coderev-border-subtle: #e8e8e8;
+    --coderev-border: #d4d4d4;
+    --coderev-border-strong: #a3a3a3;
+
+    --coderev-primary: var(--coderev-primary-600);
+    --coderev-primary-strong: var(--coderev-primary-700);
+    --coderev-primary-soft: var(--coderev-primary-50);
+
+    --coderev-secondary: var(--coderev-secondary-600);
+    --coderev-secondary-strong: var(--coderev-secondary-700);
+    --coderev-secondary-soft: var(--coderev-secondary-50);
+
+    --coderev-accent: var(--coderev-accent-500);
+    --coderev-accent-strong: var(--coderev-accent-600);
+    --coderev-accent-soft: var(--coderev-accent-50);
+
+    --coderev-cyan: #0891b2;
+    --coderev-cyan-soft: #ecfeff;
+
+    --coderev-orange: #ea580c;
+    --coderev-orange-soft: #fff7ed;
+
+    --coderev-pink: #db2777;
+    --coderev-pink-soft: #fdf2f8;
+
+    --coderev-success: #15803d;
+    --coderev-success-soft: #f0fdf4;
+
+    --coderev-warning: var(--coderev-accent-600);
+    --coderev-warning-soft: var(--coderev-accent-50);
+
+    --coderev-danger: #dc2626;
+    --coderev-danger-soft: #fef2f2;
+
+    --coderev-info: var(--coderev-primary-600);
+    --coderev-info-soft: var(--coderev-primary-50);
+
+    --coderev-focus: var(--coderev-primary-500);
+
+    --coderev-syntax-keyword: var(--coderev-primary-600);
+    --coderev-syntax-function: var(--coderev-secondary-600);
+    --coderev-syntax-string: #15803d;
+    --coderev-syntax-number: var(--coderev-accent-600);
+    --coderev-syntax-type: var(--coderev-cyan);
+    --coderev-syntax-operator: var(--coderev-orange);
+    --coderev-syntax-comment: var(--coderev-fg-muted);
+
+    --coderev-shadow-elevated:
+        0 1px 1px rgb(0 0 0 / 0.035),
+        0 2px 4px rgb(0 0 0 / 0.025);
+
+    --coderev-shadow-sunken:
+        inset 0 1px 2px rgb(0 0 0 / 0.07);
+
+    --coderev-shadow-focus-glow:
+        0 0 0 3px rgb(59 130 246 / 0.14);
+}
+
+
+/* =========================================================
+   Dark theme
+   ========================================================= */
+
+.dark {
+    color-scheme: dark;
+
+    --coderev-page: #090909;
+    --coderev-surface: #0d0d0d;
+    --coderev-elevated: #121212;
+    --coderev-sunken: #050505;
+    --coderev-overlay: #161616;
+
+    --coderev-fg: #f5f5f5;
+    --coderev-fg-secondary: #c9c9c9;
+    --coderev-fg-muted: #8a8a8a;
+    --coderev-fg-inverse: #090909;
+
+    --coderev-border-subtle: #242424;
+    --coderev-border: #333333;
+    --coderev-border-strong: #525252;
+
+    --coderev-primary: var(--coderev-primary-400);
+    --coderev-primary-strong: var(--coderev-primary-300);
+    --coderev-primary-soft: #111827;
+
+    --coderev-secondary: var(--coderev-secondary-400);
+    --coderev-secondary-strong: var(--coderev-secondary-300);
+    --coderev-secondary-soft: #1f1733;
+
+    --coderev-accent: var(--coderev-accent-300);
+    --coderev-accent-strong: var(--coderev-accent-200);
+    --coderev-accent-soft: #2b2107;
+
+    --coderev-cyan: #67e8f9;
+    --coderev-cyan-soft: #082f36;
+
+    --coderev-orange: #fb923c;
+    --coderev-orange-soft: #2b1607;
+
+    --coderev-pink: #f472b6;
+    --coderev-pink-soft: #321226;
+
+    --coderev-success: #4ade80;
+    --coderev-success-soft: #0e2516;
+
+    --coderev-warning: var(--coderev-accent-300);
+    --coderev-warning-soft: #2b2107;
+
+    --coderev-danger: #f87171;
+    --coderev-danger-soft: #2b1111;
+
+    --coderev-info: var(--coderev-primary-400);
+    --coderev-info-soft: #111827;
+
+    --coderev-focus: var(--coderev-primary-400);
+
+    --coderev-syntax-keyword: var(--coderev-primary-400);
+    --coderev-syntax-function: var(--coderev-secondary-400);
+    --coderev-syntax-string: #4ade80;
+    --coderev-syntax-number: var(--coderev-accent-300);
+    --coderev-syntax-type: var(--coderev-cyan);
+    --coderev-syntax-operator: var(--coderev-orange);
+    --coderev-syntax-comment: var(--coderev-fg-muted);
+
+    --coderev-shadow-elevated:
+        0 1px 0 rgb(255 255 255 / 0.02),
+        0 2px 5px rgb(0 0 0 / 0.16);
+
+    --coderev-shadow-sunken:
+        inset 0 1px 2px rgb(0 0 0 / 0.32);
+
+    --coderev-shadow-focus-glow:
+        0 0 0 3px rgb(96 165 250 / 0.18);
+}

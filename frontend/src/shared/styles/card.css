@@ -1,0 +1,28 @@
+@layer components {
+    .surface,
+    .card {
+        @apply border bg-surface;
+
+        border-color: var(--color-border-subtle);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-elevated);
+    }
+
+    .card-elevated {
+        background-color: var(--color-elevated);
+    }
+
+    .card-sunken {
+        border-radius: var(--radius-sm);
+        background-color: var(--color-sunken);
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .card-inset {
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .card-danger {
+        border-color: color-mix(in srgb, var(--color-danger) 35%, var(--color-border-subtle));
+    }
+}

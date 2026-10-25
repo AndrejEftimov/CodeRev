@@ -1,0 +1,704 @@
+@layer components {
+    .host-page-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .host-page-header > .button {
+        flex: 0 0 auto;
+    }
+
+    .host-toolbar {
+        min-height: 3.625rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.625rem;
+
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-surface);
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .host-toolbar > div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-inline: 0.5rem;
+    }
+
+    .host-toolbar__label {
+        color: var(--color-fg-muted);
+        font-size: 0.8rem;
+    }
+
+    .host-toolbar strong {
+        color: var(--color-primary);
+        font-family: var(--font-mono);
+        font-size: 1.375rem;
+        font-weight: 750;
+        line-height: 1;
+    }
+
+    .host-view-switcher {
+        display: inline-grid;
+        grid-template-columns: repeat(3, auto);
+        gap: 0.125rem;
+        padding: 0.1875rem;
+
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-sunken);
+    }
+
+    .host-view-switcher__button {
+        min-height: 2rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        padding-inline: 0.75rem;
+
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        background-color: transparent;
+        color: var(--color-fg-muted);
+
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+    }
+
+    .host-view-switcher__button:hover {
+        color: var(--color-fg);
+    }
+
+    .host-view-switcher__button--active {
+        border-color: var(--color-border);
+        background-color: var(--color-surface);
+        color: var(--color-primary);
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .host-slot-stack,
+    .host-slot-sections {
+        display: grid;
+        gap: 0.875rem;
+    }
+
+    .host-slot-columns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        gap: 1rem;
+    }
+
+    .host-slot-group {
+        min-width: 0;
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .host-slot-group__heading {
+        padding-inline: 0.125rem;
+    }
+
+    .host-slot-group__heading h2 {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+
+        font-size: 1rem;
+    }
+
+    .host-slot-group__count {
+        min-width: 1.625rem;
+        min-height: 1.625rem;
+        display: inline-grid;
+        place-items: center;
+
+        border: 1px solid currentColor;
+        border-radius: var(--radius-sm);
+
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .host-slot-group__heading--available h2,
+    .host-slot-group__heading--available .host-slot-group__count {
+        color: var(--color-success);
+    }
+
+    .host-slot-group__heading--available .host-slot-group__count {
+        background-color: var(--color-success-soft);
+    }
+
+    .host-slot-group__heading--taken h2,
+    .host-slot-group__heading--taken .host-slot-group__count {
+        color: var(--color-secondary);
+    }
+
+    .host-slot-group__heading--taken .host-slot-group__count {
+        background-color: var(--color-secondary-soft);
+    }
+
+    .host-slot-group__empty {
+        margin: 0;
+        padding: 1.25rem;
+        border: 1px dashed var(--color-border);
+        border-radius: var(--radius-sm);
+        color: var(--color-fg-muted);
+        font-size: 0.875rem;
+    }
+
+    .host-review-slot-card {
+        min-width: 0;
+        display: grid;
+        gap: 1rem;
+        padding: 1.125rem;
+    }
+
+    .host-review-slot-card__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .host-review-slot-card__meta {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .host-review-slot-card__time {
+        min-width: 0;
+        display: grid;
+        gap: 0.25rem;
+    }
+
+    .host-review-slot-card__time > span {
+        color: var(--color-fg-muted);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 650;
+    }
+
+    .host-review-slot-card__time strong {
+        font-size: 1.2rem;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+    }
+
+    .host-review-slot-card__actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.625rem;
+    }
+
+    .host-review-slot-card__actions .button {
+        min-height: 2.125rem;
+        padding: 0.4rem 0.7rem;
+        font-size: 0.75rem;
+    }
+
+    .host-review-slot-card__empty {
+        margin: 0;
+        padding-top: 0.875rem;
+        border-top: 1px solid var(--color-border-subtle);
+        color: var(--color-fg-muted);
+        font-size: 0.82rem;
+    }
+
+    .host-booking-details {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        margin: 0;
+        padding-top: 0.875rem;
+        border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .host-booking-details > div {
+        min-width: 0;
+        display: grid;
+        align-content: start;
+        gap: 0.25rem;
+        padding-right: 0.875rem;
+    }
+
+    .host-booking-details > div + div {
+        padding-left: 0.875rem;
+        border-left: 1px solid var(--color-border-subtle);
+    }
+
+    .host-booking-details__description {
+        grid-column: 1 / -1;
+        margin-top: 0.875rem;
+        padding-top: 0.875rem;
+        padding-left: 0 !important;
+        border-top: 1px solid var(--color-border-subtle);
+        border-left: 0 !important;
+    }
+
+    .host-booking-details dt {
+        color: var(--color-fg-muted);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+    }
+
+    .host-booking-details > div:first-child dt {
+        color: var(--color-accent-strong);
+    }
+
+    .host-booking-details dd {
+        min-width: 0;
+        max-width: 100%;
+        margin: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        color: var(--color-fg-secondary);
+        font-size: 0.82rem;
+        line-height: 1.5;
+    }
+
+    .host-booking-details__description dd {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+    }
+
+    .host-booking-details a {
+        max-width: 100%;
+        display: inline-block;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        color: var(--color-primary);
+    }
+
+
+
+    .host-create-modal {
+        width: min(100%, 52rem);
+    }
+
+    .host-booking-details-modal {
+        width: min(100%, 52rem);
+    }
+
+    .host-booking-modal {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .host-booking-modal__summary {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.875rem 1rem;
+
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-card);
+    }
+
+    .host-booking-modal__summary > div {
+        min-width: 0;
+        display: grid;
+        justify-items: end;
+        gap: 0.125rem;
+        text-align: right;
+    }
+
+    .host-booking-modal__summary span {
+        color: var(--color-fg-muted);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 650;
+    }
+
+    .host-booking-modal__summary strong {
+        color: var(--color-fg);
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+    .host-booking-modal__details {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin: 0;
+    }
+
+    .host-booking-modal__item {
+        min-width: 0;
+        display: grid;
+        align-content: start;
+        gap: 0.375rem;
+        padding: 0.875rem 1rem;
+
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-card);
+    }
+
+    .host-booking-modal__item dt {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--color-fg-muted);
+
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+    }
+
+    .host-booking-modal__item dt svg {
+        color: currentColor;
+    }
+
+    .host-booking-modal__item--accent dt {
+        color: var(--color-accent-strong);
+    }
+
+    .host-booking-modal__item dd {
+        min-width: 0;
+        max-width: 100%;
+        margin: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        color: var(--color-fg-secondary);
+        font-size: 0.9rem;
+        line-height: 1.55;
+    }
+
+    .host-booking-modal__item a {
+        max-width: 100%;
+        display: inline-block;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        color: var(--color-primary);
+    }
+
+    .host-booking-modal__item--wide,
+    .host-booking-modal__item--context {
+        grid-column: 1 / -1;
+    }
+
+    .host-booking-modal__item--context dd {
+        max-height: 16.2rem;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+        padding-right: 0.5rem;
+
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+
+    .host-review-slot-card--loading {
+        min-height: 8rem;
+        align-content: center;
+    }
+
+    .host-create-form {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .host-schedule-builder {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.875rem;
+    }
+
+    .host-schedule-panel {
+        min-width: 0;
+        display: grid;
+        align-content: start;
+        gap: 0.875rem;
+        padding: 0.875rem;
+
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-sunken);
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .host-schedule-panel__heading {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-fg-secondary);
+
+        font-size: 0.8125rem;
+        font-weight: 750;
+    }
+
+    .host-schedule-panel__heading svg {
+        color: var(--color-primary);
+    }
+
+    .host-schedule-time-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+
+    .host-schedule-input {
+        position: relative;
+        min-width: 0;
+    }
+
+    .host-schedule-input__icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        z-index: 1;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: var(--color-fg-muted);
+    }
+
+    .host-schedule-input__control {
+        min-height: 2.875rem;
+        padding-left: 2.35rem;
+        background-color: var(--color-surface);
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        font-weight: 650;
+    }
+
+    .host-schedule-input__control[type='number'] {
+        padding-right: 3.25rem;
+    }
+
+    .host-schedule-input__suffix {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: var(--color-fg-muted);
+
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+
+    .host-duration-presets {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .host-duration-presets > span {
+        color: var(--color-fg-muted);
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .host-duration-presets > div {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.375rem;
+    }
+
+    .host-duration-preset {
+        min-height: 2rem;
+        padding-inline: 0.5rem;
+
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-surface);
+        color: var(--color-fg-muted);
+
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .host-duration-preset:hover:not(:disabled) {
+        border-color: var(--color-border-strong);
+        background-color: var(--color-surface);
+        color: var(--color-fg);
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .host-duration-preset--active {
+        border-color: var(--color-secondary);
+        background-color: var(--color-secondary-soft);
+        color: var(--color-secondary);
+        box-shadow: var(--inset-shadow-sunken);
+    }
+
+    .host-create-form__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        padding-top: 0.25rem;
+    }
+
+    @media (max-width: 54rem) {
+        .host-slot-columns {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 45rem) {
+        .host-booking-modal__summary {
+            align-items: flex-start;
+        }
+
+        .host-booking-modal__summary > div {
+            justify-items: start;
+            text-align: left;
+        }
+
+        .host-booking-modal__details {
+            grid-template-columns: 1fr;
+        }
+
+        .host-review-slot-card {
+            gap: 0.75rem;
+            padding: 0.875rem;
+        }
+
+        .host-page-header {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .host-page-header > .button {
+            width: 100%;
+        }
+
+        .host-toolbar {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .host-toolbar > div:first-child {
+            min-height: 2rem;
+            justify-content: center;
+        }
+
+        .host-view-switcher {
+            width: 100%;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .host-review-slot-card__header {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .host-review-slot-card__meta {
+            width: 100%;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.625rem;
+        }
+
+        .host-review-slot-card__actions {
+            width: 100%;
+            margin-left: 0;
+            justify-content: flex-start;
+            padding-top: 0.625rem;
+            border-top: 1px solid var(--color-border-subtle);
+        }
+
+        .host-booking-details {
+            grid-template-columns: 1fr;
+        }
+
+        .host-booking-details > div,
+        .host-booking-details > div + div {
+            padding: 0.625rem 0;
+            border-left: 0;
+        }
+
+        .host-booking-details > div + div {
+            border-top: 1px solid var(--color-border-subtle);
+        }
+
+        .host-booking-details__description {
+            margin-top: 0;
+        }
+
+        .host-booking-details__description dd {
+            -webkit-line-clamp: 3;
+        }
+
+        .host-schedule-builder {
+            grid-template-columns: 1fr;
+        }
+
+        .host-schedule-time-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .host-create-form__actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 28rem) {
+        .host-review-slot-card__actions {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .host-review-slot-card__actions .button {
+            width: 100%;
+        }
+    }
+}
+
+
+/* Keep create-slot density adjustments local to this modal. */
+@media (min-width: 45.01rem) {
+    .host-create-modal .host-create-form {
+        gap: 0.875rem;
+    }
+
+    .host-create-modal .host-schedule-builder {
+        gap: 0.75rem;
+    }
+
+    .host-create-modal .host-schedule-panel {
+        gap: 0.75rem;
+        padding: 0.875rem;
+    }
+
+    .host-create-modal .host-schedule-time-grid {
+        gap: 0.625rem;
+    }
+}
+

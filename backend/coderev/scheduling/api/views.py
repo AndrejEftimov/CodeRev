@@ -5,6 +5,7 @@ from core.api import (
     error_response,
     json_response,
 )
+from core.api.pagination import PaginationError, paginate_queryset
 from scheduling.models import ReviewSlot
 from scheduling.services import (
     BookingValidationError,
@@ -61,7 +62,7 @@ def _validation_error_response(error):
 #======================================
 
 def public_review_slot_list(request):
-    """Return active ReviewSlots using the public-safe representation."""
+    """Return paginated active ReviewSlots using the public-safe representation."""
 
     if request.method != "GET":
         return error_response(
@@ -73,6 +74,19 @@ def public_review_slot_list(request):
     now = timezone.now()
     review_slots = _get_active_review_slots(now=now)
 
+    try:
+        review_slots, pagination = paginate_queryset(
+            review_slots,
+            request,
+            default_page_size=6,
+        )
+    except PaginationError as error:
+        return error_response(
+            code="invalid_request",
+            message=str(error),
+            status=400,
+        )
+
     return json_response(
         {
             "reviewSlots": [
@@ -82,6 +96,7 @@ def public_review_slot_list(request):
                 )
                 for review_slot in review_slots
             ],
+            "pagination": pagination,
         }
     )
 
@@ -161,7 +176,7 @@ def host_review_slot_list(request):
     """List or create ReviewSlots for the host interface."""
 
     if request.method == "GET":
-        return _host_review_slot_list_get()
+        return _host_review_slot_list_get(request)
 
     if request.method == "POST":
         return _host_review_slot_list_post(request)
@@ -173,9 +188,22 @@ def host_review_slot_list(request):
     )
 
 
-def _host_review_slot_list_get():
+def _host_review_slot_list_get(request):
     now = timezone.now()
     review_slots = _get_active_review_slots(now=now)
+
+    try:
+        review_slots, pagination = paginate_queryset(
+            review_slots,
+            request,
+            default_page_size=8,
+        )
+    except PaginationError as error:
+        return error_response(
+            code="invalid_request",
+            message=str(error),
+            status=400,
+        )
 
     return json_response(
         {
@@ -186,6 +214,7 @@ def _host_review_slot_list_get():
                 )
                 for review_slot in review_slots
             ],
+            "pagination": pagination,
         }
     )
 

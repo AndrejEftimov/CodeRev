@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
+from core.timezones import to_display_datetime
 from scheduling.models import Booking, ReviewSlot
 
 
@@ -35,6 +36,12 @@ class PublicReviewSlotApiTests(TestCase):
             response.json(),
             {
                 "reviewSlots": [],
+                "pagination": {
+                    "page": 1,
+                    "pageSize": 6,
+                    "totalItems": 0,
+                    "totalPages": 1,
+                },
             },
         )
 
@@ -50,8 +57,8 @@ class PublicReviewSlotApiTests(TestCase):
 
         payload = response.json()["reviewSlots"][0]
 
-        expected_start = timezone.localtime(self.base)
-        expected_end = timezone.localtime(
+        expected_start = to_display_datetime(self.base)
+        expected_end = to_display_datetime(
             self.base + timedelta(minutes=30)
         )
 
@@ -194,6 +201,65 @@ class PublicReviewSlotApiTests(TestCase):
         self.assertNotIn("email", payload)
         self.assertNotIn("reviewTopic", payload)
         self.assertNotIn("reviewDescription", payload)
+
+
+    #======================================
+    # PAGINATION
+    #======================================
+
+    def test_get_paginates_review_slots(self):
+        for index in range(7):
+            self._create_slot(
+                start_at=self.base + timedelta(hours=index),
+                end_at=self.base + timedelta(hours=index, minutes=30),
+            )
+
+        response = self.client.get(
+            self.url,
+            {"page": 2, "pageSize": 3},
+        )
+
+        payload = response.json()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(payload["reviewSlots"]), 3)
+        self.assertEqual(
+            payload["pagination"],
+            {
+                "page": 2,
+                "pageSize": 3,
+                "totalItems": 7,
+                "totalPages": 3,
+            },
+        )
+
+    def test_get_clamps_page_beyond_last_page(self):
+        for index in range(2):
+            self._create_slot(
+                start_at=self.base + timedelta(hours=index),
+                end_at=self.base + timedelta(hours=index, minutes=30),
+            )
+
+        response = self.client.get(
+            self.url,
+            {"page": 99, "pageSize": 1},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["pagination"]["page"], 2)
+        self.assertEqual(len(response.json()["reviewSlots"]), 1)
+
+    def test_get_rejects_invalid_pagination_parameters(self):
+        response = self.client.get(
+            self.url,
+            {"page": 0},
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(
+            response.json()["error"]["code"],
+            "invalid_request",
+        )
 
     #======================================
     # HTTP BEHAVIOR
